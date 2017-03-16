@@ -8,15 +8,13 @@ import router from './router'
 // import css from './assets/css/index.css'
 // import css from './assets/css/common.css'
 
-
-
 Vue.use(ElementUI)
 
-/* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
-  // render: h => h(App),
   template: '<App/>',
-  components: { App }
+  components: { 
+  	App
+  }
 })

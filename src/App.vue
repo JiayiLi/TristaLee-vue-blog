@@ -51,8 +51,9 @@
         </el-col>
         <el-col :span="6">
           <div class="grid-content">
-            fjdshfjkdhfdjh
-            <!-- <router-view name="searchPart"></router-view> -->
+
+            <right-contain></right-contain>
+
           </div>
         </el-col>
       </el-row>
@@ -68,8 +69,13 @@
 </template>
 
 <script>
+import rightContain from './components/right-contain'
+
 export default {
   name: 'app',
+  components:{
+    rightContain
+  },
   data () {
     return {
       isActive:'',
