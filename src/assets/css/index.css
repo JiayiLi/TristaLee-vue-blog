@@ -1,0 +1,153 @@
+html,body,p,ol,ul,li,dl,dt,dd,blockquote,figure,fieldset,legend,textarea,pre,iframe,hr,h1,h2,h3,h4,h5,h6 {
+  margin: 0;
+  padding: 0
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-size: 100%;
+  font-weight: normal
+}
+
+ul {
+  list-style: none
+}
+
+button,input,select,textarea {
+  margin: 0
+}
+
+html {
+  box-sizing: border-box
+}
+
+* {
+  box-sizing: inherit
+}
+
+*:before,*:after {
+  box-sizing: inherit
+}
+
+
+td,th {
+  padding: 0;
+  text-align: left
+}
+
+
+#app {
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+  /* margin-top: 60px; */
+}
+.header {
+    background-color: #324157;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    position: relative;
+
+}
+
+.footer {
+    background-color: #324157;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    position: relative;
+    text-align: center;
+    color: #bfcbd9;
+    line-height: 60px;
+}
+
+.container {
+    width: 1140px;
+    padding: 0 30px;
+    margin: 0 auto;
+    min-width: 
+}
+
+.header-name a {
+  cursor: pointer;
+  color: #bfcbd9;
+  height: 60px;
+  line-height: 60px;
+  font-size: 20px;
+  margin-left: 10px;
+}
+.header-name a:hover,.header-name a:active,.header-name a:visited{
+  color: #bfcbd9;
+}
+
+.header-logo img {
+  cursor: pointer;
+  width: 50px;
+  border-radius: 3px;
+  margin-top: 5px;
+  margin-left: 20px;
+
+}
+
+.clearfix {
+  overflow: auto;
+  zoom: 1;
+}
+
+.inline-block{
+  display: inline-block;
+}
+
+.header_search {
+  /* width: 10px; */
+  height: 60px;
+  line-height: 60px;
+  color:#bfcbd9;
+  font-size: 18px;
+  transition:all .2s ease-in 0s;
+  position: relative;
+}
+
+.header_search input{
+    height: 35px;
+    width: 0;
+    padding: 0 42px 0 15px;
+    border: none;
+    border-bottom: 2px solid transparent;
+    outline: none;
+    background: transparent;
+    transition: .4s cubic-bezier(0, 0.8, 0, 1);
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    z-index: 2;
+    color: #bfcbd9;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+}
+.header_search input:focus{
+    width: 300px;
+    z-index: 1;
+    border-bottom: 2px solid #20a0ff;
+    transition: .4s cubic-bezier(0, 0.8, 0, 1);
+}
+
+.header_search button{
+    background: #324157;
+    border: none;
+    height: 42px;
+    width: 42px;
+    font-size:20px; 
+    line-height: 55px;
+    color: #bfcbd9;
+    position: absolute;
+    right: 20px;
+    top: 0;
+    cursor: pointer;
+}
+
+
