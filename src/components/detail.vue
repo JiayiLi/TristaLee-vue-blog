@@ -1,45 +1,58 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
+.detail-wrap{
+  border-left: 3px solid #C6CA53;
+  padding: 10px 20px 10px;
+}
+.title{
+  font-size: 20px;
+  color: #CC6699;
+  margin-left:0px;
+  transition:all .2s ease-in 0s;
+}
+.title:hover{
+  color: #669966;
+  margin-left: 30px;
+  transition:all .2s ease-in 0s;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
+.content{
+  font-size: 14px;
+  line-height: 1.5rem;
+  margin-top: 15px;
   display: inline-block;
-  margin: 0 10px;
 }
 
-a {
-  color: #42b983;
+.recommend {
+  margin-top: 25px;
+}
+.recommend h4{
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.recommend ul li{
+  line-height: 20px;
+  font-size: 12px;
 }
 </style>
 
 <template>
-  <div class="detail">
-    <h1>Welcome to My Blog</h1>
-    
-    <!-- <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://gitter.im/vuejs/vue" target="_blank">Gitter Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-      <br>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This Template</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul> -->
+  <div class="detail m-t">
+    <div class="detail-wrap">
+      <h1 class="title">{{detail.title}}</h1>
+      <span class="content">
+        {{detail.content}}
+      </span>
+    </div>
+    <div class="recommend">
+      <h4>推荐阅读</h4>
+      <ul class="m-t-sm">
+        <li v-for="rec in recommends">
+          <a v-bind:href="'/tristalee/tec/detail/'+rec.id" target="_blank" >{{rec.title}}</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -48,7 +61,30 @@ export default {
   name: 'detail',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      detail:{
+        id:"1",
+        title:"文章一 就会发觉很多风景",
+        content:"hjhjdhfakjdhfjdfjdkshfjkfjhdsjkfhjkdshfjdhsfjhdsjkfhjdkshfjkdhjfdvbncxbvnbcnvbcnbvncbvncbxnvbxcnufii反馈倒海翻江大煞风景的是翻江倒海积分活动十分好的设计规范，活动时间发货的设计风华绝代舒服，风刀霜剑还翻江倒海时间发货的设计风，放假都开始放假的设计风看见的",
+      },
+      recommends:[
+        {
+          id:2,
+          title:"文章二 回家大煞风景"
+        },
+        {
+          id:2,
+          title:"文章二 回家大煞风景"
+        },
+        {
+          id:2,
+          title:"文章二 回家大煞风景"
+        },
+        {
+          id:2,
+          title:"文章二 回家大煞风景"
+        }
+      ]
     }
   }
 }

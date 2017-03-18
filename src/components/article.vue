@@ -24,9 +24,7 @@
     line-height: 50px;
     border-bottom: 3px dotted #72CBCA;
   }
-/*   .article{
-    min-height: 800px;
-  } */
+
 </style>
 
 <template>
@@ -38,10 +36,10 @@
       <li v-for="art in pagination(artdata)" class="m-b-lg art_list padder">
         <el-row :gutter="10" class="m-b-sm">
           <el-col :sm="18">
-            <a v-bind:href="'/tristalee/art/detail/'+art.id" class="art_name">{{art.art_name}}</a>
+            <a v-bind:href="'/tristalee/art/detail/'+art.id" target="_blank" class="art_name">{{art.art_name}}</a>
           </el-col>
           <el-col :sm="6">
-            <a v-bind:href="'/tristalee/art/detail/'+art.id" class="creat_time">{{art.creat_time}}</a>
+            <a v-bind:href="'/tristalee/art/detail/'+art.id" target="_blank" class="creat_time">{{art.creat_time}}</a>
           </el-col>
         </el-row>  
         <el-row >
