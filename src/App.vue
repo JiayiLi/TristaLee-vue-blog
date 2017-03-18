@@ -25,7 +25,7 @@
               <router-link to="/tristalee/article" tag="li">Just Articles</router-link>
             </el-menu-item>
             <el-menu-item index="3">
-              <router-link to="/tristalee" tag="li">Home</router-link>
+              <router-link to="/tristalee" tag="li">About ME</router-link>
             </el-menu-item>
            <!--  <el-submenu index="3">
               <template slot="title">我的工作台</template>
@@ -41,30 +41,28 @@
         <!-- </el-row> -->
       </div>
     </header>
-
-    <div class="container m-t">
+    <div class="container m-t m-b-lg">
       <el-row :gutter="10">
-        <el-col :span="18">
+        <el-col :span="hidesidebar?18:24">
           <div class="grid-content">
             <router-view keep-alive></router-view>
           </div>
         </el-col>
-        <el-col :span="6">
+        <el-col :span="6"  v-if="hidesidebar">
           <div class="grid-content">
-
             <right-contain></right-contain>
-
           </div>
         </el-col>
       </el-row>
     </div>
+    
     <!-- 导航结束 -->
     <!-- <router-view></router-view> -->
 
 
-    <footer class="footer">
+   <!--  <footer class="footer">
       <h3>Copyright ©2017 TristaLee</h3>
-    </footer>
+    </footer> -->
   </div>
 </template>
 
@@ -88,8 +86,18 @@ export default {
       }
     }
   },
+  watch:{
+    '$route' (to , from){
+      this.currentRoute = to.path;
+    }
+  },
   created: function () {
     this.isActive = this.allNav[this.currentRoute];
+  },
+  computed:{
+    hidesidebar:function(){
+      return (this.currentRoute !== "/tristalee" && this.currentRoute !=="/");
+    }
   }
 }
 </script>

@@ -24,9 +24,10 @@
     line-height: 50px;
     border-bottom: 3px dotted #72CBCA;
   }
-  .tecblog{
+/*   .tecblog{
     min-height: 800px;
   }
+ */
 </style>
 
 <template>
@@ -38,10 +39,10 @@
       <li v-for="tec in pagination(tecdata)" class="m-b-lg tec_list padder">
         <el-row :gutter="10" class="m-b-sm">
           <el-col :sm="18">
-            <a v-bind:href="'/tec/detail/'+tec.id" class="tec_name">{{tec.tec_name}}</a>
+            <a v-bind:href="'/tristalee/tec/detail/'+tec.id" class="tec_name">{{tec.tec_name}}</a>
           </el-col>
           <el-col :sm="6">
-            <a v-bind:href="'/tec/detail/'+tec.id" class="creat_time">{{tec.creat_time}}</a>
+            <a v-bind:href="'/tristalee/tec/detail/'+tec.id" class="creat_time">{{tec.creat_time}}</a>
           </el-col>
         </el-row>  
         <el-row >
