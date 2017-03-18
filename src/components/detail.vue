@@ -1,4 +1,3 @@
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .detail-wrap{
   border-left: 3px solid #C6CA53;
