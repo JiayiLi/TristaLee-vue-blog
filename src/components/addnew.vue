@@ -15,14 +15,15 @@
     <el-row :gutter="20" class="m-t">
         <el-col :span="12" :offset="6">
             <div class="grid-content">
-                <!-- <mt-button @click="geteditor()" type="danger">获取</mt-button>
-                <script id="editor" type="text/plain" style="width:1024px;height:500px;"></script> -->
+                <script id="editor" type="text/plain"></script>
             </div>
         </el-col>
     </el-row>
    
   </div>
 </template>
+
+
 <script>
 export default {
   name: 'addnew',
@@ -33,11 +34,16 @@ export default {
         editor: null,
     }
   },
-  created:function(){
-    console.log(222);
-    // var ue = UE.getEditor('container');
+  // created:function(){
+  //   console.log(222);
+  //   var ue = UE.getEditor('editor');
 
+  // },
+  mounted() {
+    this.editor = UE.getEditor('editor');
   },
- 
+  destroyed() {
+    this.editor.destroy();
+  }
 }
 </script>
