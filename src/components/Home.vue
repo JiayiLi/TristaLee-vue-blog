@@ -259,7 +259,7 @@
         <el-col :span="24">
           <div class="grid-content about-me">
             <ul>
-              <li>I am A Front-end Developer</li>
+              <li>I am A Front-end Dev Engineer</li>
               <li>A fan of Google</li>
               <li>Like taking photos</li>
               <li>( wanna see my pics,visit my <a href="https://www.instagram.com/dumplings0526/" target="_blank">ins:dumplings0526
