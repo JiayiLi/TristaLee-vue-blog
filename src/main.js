@@ -12,6 +12,7 @@ import router from './router'
 
 Vue.use(ElementUI)
 
+
 new Vue({
   el: '#app',
   router,
