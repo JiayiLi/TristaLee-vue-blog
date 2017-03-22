@@ -47,7 +47,7 @@ export default {
   },
   methods:{
     getUeditorContent:function(){
-        
+        console.log(this.input);
         console.log(this.editor.getContent());
     }
   }
