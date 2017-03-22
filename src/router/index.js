@@ -7,8 +7,6 @@ import detail from 'components/detail'
 import addnew from 'components/addnew'
 
 
-console.log(addnew);
-
 Vue.use(Router)
 
 const router = new Router({
