@@ -55,7 +55,7 @@
 </template>
 
 <script>
-
+import axios from 'axios';
 export default {
   name: 'tecblog',
   data () {
@@ -144,6 +144,12 @@ export default {
         ],
     }
   },
+  created:function(){
+    this.getTecBlog();
+  },
+  http: {
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+  },
   methods:{
     handleCurrentChange:function(val){
       this.tecdata_show = val;
@@ -154,8 +160,19 @@ export default {
       var currPageTec = [];
       currPageTec = tecdata.slice(10*currPage-10,10*currPage);
       return currPageTec;
+    },
+    getTecBlog:function(){
+      axios.get('/static/backphp/conn_sql.php')
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     }
   }
 }
+
+
 
 </script>
