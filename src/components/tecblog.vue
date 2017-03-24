@@ -162,7 +162,24 @@ export default {
       return currPageTec;
     },
     getTecBlog:function(){
-      axios.get('/static/backphp/conn_sql.php')
+      // axios.get('/apitest/movie/in_theaters')
+      // .then(function (response) {
+      //   console.log(response);
+      // })
+      // .catch(function (error) {
+      //   console.log(error);
+      // });
+
+      // axios.get('/api/conn_sql.php')
+      // .then(function (response) {
+      //   console.log(response);
+      // })
+      // .catch(function (error) {
+      //   console.log(error);
+      // });
+      axios.post('/api/tec.php',{
+        type:'tec'
+      })
       .then(function (response) {
         console.log(response);
       })

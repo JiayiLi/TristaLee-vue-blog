@@ -1,61 +1,76 @@
 <?php
+/**
+* 
+*/
 
-$q=1;
-$con = mysql_connect('localhost', 'root', 'abc123');
-if (!$con)
- {
- die('Could not connect: ' . mysql_error());
- }
+class ConnMySQL 
+{
+	protected $HOST = '127.0.0.1';
+	protected $UserName = 'root';
+	protected $PassWord = '123456';
+	protected $Database = 'tristalee_blog';
+	public $TEST = 'test';
 
-mysql_select_db("tristalee_blog", $con);
+	public function makeConnect($type){
+		$db = new mysqli($this->HOST, $this->UserName, $this->PassWord,
+			$this->Database);
+		// if ($mysqli->connect_error) {
+  //   		die('Connect Error (' . $mysqli->connect_errno . ') '
+  //           	. $mysqli->connect_error);
+		// }
+		// if (mysqli_connect_error()) {
+		//     die('Connect Error (' . mysqli_connect_errno() . ') '
+		//             . mysqli_connect_error());
+		// }
+		// 技术文章
+		if($type === 'tec'){
+			$result = $db -> query("SELECT * FROM tec_blog");
+		// 杂文
+		}else if($type === 'art'){
+			$result =  $db -> query("SELECT * FROM art_blog");
+		}
 
-$sql="SELECT * FROM art_blog WHERE id = '".$q."'";
+		if ($result) {
+			while ($row = $result -> fetch_object()){
+				$tecData[] = $row;
+			}
+			print_r($tecData);
+			echo '<br>';
+			echo '<br>';
 
-$result = mysql_query($sql);
-echo "<table border='1'>
-<tr>
-<th>Firstname</th>
-<th>Lastname</th>
-<th>Age</th>
-<th>Hometown</th>
-<th>Job</th>
-</tr>";
+		    /* free result set */
+		    $result->close();
+		}else {
+			echo "wrong type";
+		}
+		$db->close();
+	}	
 
-while($row = mysql_fetch_array($result))
- {
- echo "<tr>";
- echo "<td>" . $row['id'] . "</td>";
- echo "<td>" . $row['title'] . "</td>";
- echo "<td>" . $row['brief'] . "</td>";
- echo "<td>" . $row['content'] . "</td>";
- echo "<td>" . $row['creat_time'] . "</td>";
- echo "</tr>";
- }
-echo "</table>";
 
-mysql_close($con);
-// class vueblog
-// {	
-// 	public function getMysqlData()
-// 	{
-// 		print_r("uhuh")
-// 	}
+	public function hosttest(){
+		echo  $this->HOST;
+		echo '<br>';
+	}
+	public function test(){
+		echo $this -> TEST;
+		echo '<br>';
+	}
 
-// 	$con = mysql_connect("localhost","root","123456");
 
-// 	if (!$con)
-// 	  {
-// 	  die('Could not connect: ' . mysql_error());
-// 	  }
-// 	mysql_close($con);
-
-// 	return $con;
-// 	some code
-	
+}
+// $mysqli = new mysqli('127.0.0.1', 'root', '123456', 'tristalee_blog');
+// if ($mysqli->connect_error) {
+//     die('Connect Error (' . $mysqli->connect_errno . ') '
+//             . $mysqli->connect_error);
 // }
-// 
+// if (mysqli_connect_error()) {
+//     die('Connect Error (' . mysqli_connect_errno() . ') '
+//             . mysqli_connect_error());
+// }
 
+// echo 'Success... ' . $mysqli->host_info . "\n";
 
+// $mysqli->close();
 
 
 ?>

@@ -2,19 +2,20 @@ require('./check-versions')()
 
 process.env.NODE_ENV = 'production'
 
-var ora = require('ora')
+var ora = require('ora') // 一个很好看的 loading 插件
 var rm = require('rimraf')
 var path = require('path')
 var chalk = require('chalk')
-var webpack = require('webpack')
-var config = require('../config')
-var webpackConfig = require('./webpack.prod.conf')
+var webpack = require('webpack')  // 加载 webpack
+var config = require('../config') // 加载 config.js
+var webpackConfig = require('./webpack.prod.conf') // 加载 webpack.prod.conf
 
-var spinner = ora('building for production...')
-spinner.start()
+var spinner = ora('building for production...') // 使用 ora 打印出 loading + log
+spinner.start()  // 开始 loading 动画
 
 rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
   if (err) throw err
+  //开始 webpack 的编译
   webpack(webpackConfig, function (err, stats) {
     spinner.stop()
     if (err) throw err
