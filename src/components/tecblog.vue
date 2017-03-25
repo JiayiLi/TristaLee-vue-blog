@@ -56,6 +56,8 @@
 
 <script>
 import axios from 'axios';
+import qs from 'qs';
+
 export default {
   name: 'tecblog',
   data () {
@@ -177,9 +179,26 @@ export default {
       // .catch(function (error) {
       //   console.log(error);
       // });
-      axios.post('/api/tec.php',{
+      // 
+      // axios({
+      //     method: 'post',
+      //     url: '/api/tec.php',
+      //     params: {
+      //       type:'tec'
+      //     }
+      // });
+      // axios.post('/api/tec.php',{
+      //   type:'tec'
+      // })
+      // .then(function (response) {
+      //   console.log(response);
+      // })
+      // .catch(function (error) {
+      //   console.log(error);
+      // });
+      axios.post('/api/tec.php',qs.stringify({
         type:'tec'
-      })
+      }))
       .then(function (response) {
         console.log(response);
       })

@@ -17,6 +17,7 @@
     "babel-plugin-transform-remove-strict-mode": "0.0.2",
     "babel-runtime": "^6.23.0",
     "element-ui": "^1.2.1",
+    "qs": "^6.4.0",
     "vue": "^2.1.10",
     "vue-router": "^2.2.0",
     "webpack-hot-middleware": "^2.17.0"
@@ -85,7 +86,7 @@
     "webpack-hot-middleware": "^2.16.1",
     "webpack-merge": "^2.6.1",
     "babel-plugin-transform-remove-strict-mode": "0.0.2"
-    },
+  },
   "engines": {
     "node": ">= 4.0.0",
     "npm": ">= 3.0.0"
