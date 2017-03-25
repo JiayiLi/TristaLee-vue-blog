@@ -187,15 +187,16 @@ export default {
       //       type:'tec'
       //     }
       // });
-      // axios.post('/api/tec.php',{
-      //   type:'tec'
-      // })
-      // .then(function (response) {
-      //   console.log(response);
-      // })
-      // .catch(function (error) {
-      //   console.log(error);
-      // });
+      // 
+      axios.post('/api/tec.php',{
+        type:'tec'
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
       axios.post('/api/tec.php',qs.stringify({
         type:'tec'
       }))
