@@ -36,14 +36,14 @@
       <li v-for="tec in pagination(tecdata)" class="m-b-lg tec_list padder">
         <el-row :gutter="10" class="m-b-sm">
           <el-col :sm="18">
-            <a v-bind:href="'/tristalee/tec/detail/'+tec.id" target="_blank" class="tec_name">{{tec.tec_name}}</a>
+            <a v-bind:href="'/tristalee/tec/detail/'+tec.id" target="_blank" class="tec_name">{{tec.title}}</a>
           </el-col>
           <el-col :sm="6">
             <a v-bind:href="'/tristalee/tec/detail/'+tec.id" target="_blank" class="creat_time">{{tec.creat_time}}</a>
           </el-col>
         </el-row>  
         <el-row >
-          <span class="briefly">摘要：{{tec.briefly}}</span>
+          <span class="briefly">摘要：{{tec.brief}}</span>
         </el-row>
       </li>
     </ul> 
@@ -65,95 +65,96 @@ export default {
       msg: 'Welcome to Your tecblog',
       tecdata_show:1,
       tecdata:[
-          {  
-            id:1,
-            tec_name:"文章一 就会发觉很多风景",
-            creat_time:"2017-01-01",
-            briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          },
-          { 
-            id:2,
-            tec_name:"文章二 回家大煞风景",
-            creat_time:"2017-01-03",
-            briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          },
-          { 
-            id:3,
-            tec_name:"文章三 翻江倒海风景",
-            creat_time:"2017-05-01",
-            briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          },
-          { 
-            id:4,
-            tec_name:"文章四 肯定就是看风景",
-            creat_time:"2017-09-01",
-            briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          },
-          { 
-            id:5,
-            tec_name:"文章五 风刀霜剑回家地方",
-            creat_time:"2016-04-01",
-            briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          },
-          { 
-            id:6,
-            tec_name:"文章六 繁华的咖啡机蝴蝶结",
-            creat_time:"2017-07-01",
-            briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          },
-          { 
-            id:7,
-            tec_name:"文章七 发动机伤口恢复绝代风华",
-            creat_time:"2012-01-01",
-            briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          },
-          { 
-            id:8,
-            tec_name:"文章八 黄金时代恢复健康的",
-            creat_time:"2018-08-01",
-            briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          },
-          { 
-            id:9,
-            tec_name:"文章九 复活节岛上飞机的",
-            creat_time:"2018-11-01",
-            briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          },
-          { 
-            id:10,
-            tec_name:"文章十 份好的客户风景",
-            creat_time:"2016-01-31",
-            briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          },
-          { 
-            id:11,
-            tec_name:"文章十一 可入俄反恐大会",
-            creat_time:"2017-01-01",
-            briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          },
-          { 
-            id:12,
-            tec_name:"文章十二 南北方的暴发户",
-            creat_time:"2017-01-01",
-            briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          },
-          { 
-            id:13,
-            tec_name:"文章十三 尽快发货的肌肤",
-            creat_time:"2017-01-01",
-            briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          },
+          // {  
+          //   id:1,
+          //   tec_name:"文章一 就会发觉很多风景",
+          //   creat_time:"2017-01-01",
+          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
+          // },
+          // { 
+          //   id:2,
+          //   tec_name:"文章二 回家大煞风景",
+          //   creat_time:"2017-01-03",
+          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
+          // },
+          // { 
+          //   id:3,
+          //   tec_name:"文章三 翻江倒海风景",
+          //   creat_time:"2017-05-01",
+          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
+          // },
+          // { 
+          //   id:4,
+          //   tec_name:"文章四 肯定就是看风景",
+          //   creat_time:"2017-09-01",
+          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
+          // },
+          // { 
+          //   id:5,
+          //   tec_name:"文章五 风刀霜剑回家地方",
+          //   creat_time:"2016-04-01",
+          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
+          // },
+          // { 
+          //   id:6,
+          //   tec_name:"文章六 繁华的咖啡机蝴蝶结",
+          //   creat_time:"2017-07-01",
+          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
+          // },
+          // { 
+          //   id:7,
+          //   tec_name:"文章七 发动机伤口恢复绝代风华",
+          //   creat_time:"2012-01-01",
+          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
+          // },
+          // { 
+          //   id:8,
+          //   tec_name:"文章八 黄金时代恢复健康的",
+          //   creat_time:"2018-08-01",
+          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
+          // },
+          // { 
+          //   id:9,
+          //   tec_name:"文章九 复活节岛上飞机的",
+          //   creat_time:"2018-11-01",
+          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
+          // },
+          // { 
+          //   id:10,
+          //   tec_name:"文章十 份好的客户风景",
+          //   creat_time:"2016-01-31",
+          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
+          // },
+          // { 
+          //   id:11,
+          //   tec_name:"文章十一 可入俄反恐大会",
+          //   creat_time:"2017-01-01",
+          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
+          // },
+          // { 
+          //   id:12,
+          //   tec_name:"文章十二 南北方的暴发户",
+          //   creat_time:"2017-01-01",
+          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
+          // },
+          // { 
+          //   id:13,
+          //   tec_name:"文章十三 尽快发货的肌肤",
+          //   creat_time:"2017-01-01",
+          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
+          // },
         ],
     }
   },
   created:function(){
     this.getTecBlog();
   },
-  http: {
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-  },
+  // http: {
+  //   headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+  // },
   methods:{
     handleCurrentChange:function(val){
+      console.log(this);
       this.tecdata_show = val;
       window.scrollTo(0, 0);
     },
@@ -164,44 +165,18 @@ export default {
       return currPageTec;
     },
     getTecBlog:function(){
-      // axios.get('/apitest/movie/in_theaters')
-      // .then(function (response) {
-      //   console.log(response);
-      // })
-      // .catch(function (error) {
-      //   console.log(error);
-      // });
-
-      // axios.get('/api/conn_sql.php')
-      // .then(function (response) {
-      //   console.log(response);
-      // })
-      // .catch(function (error) {
-      //   console.log(error);
-      // });
-      // 
-      // axios({
-      //     method: 'post',
-      //     url: '/api/tec.php',
-      //     params: {
-      //       type:'tec'
-      //     }
-      // });
-      // 
-      axios.post('/api/tec.php',{
-        type:'tec'
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+      var self = this;
       axios.post('/api/tec.php',qs.stringify({
-        type:'tec'
+        type:'tec',
+        operate:"getlist",
       }))
       .then(function (response) {
-        console.log(response);
+        if(response.data.status.code === 1){
+          self.tecdata = response.data.data;
+          console.log(response.data.data);
+          console.log(this);
+        }
+       
       })
       .catch(function (error) {
         console.log(error);

@@ -36,14 +36,14 @@
       <li v-for="art in pagination(artdata)" class="m-b-lg art_list padder">
         <el-row :gutter="10" class="m-b-sm">
           <el-col :sm="18">
-            <a v-bind:href="'/tristalee/art/detail/'+art.id" target="_blank" class="art_name">{{art.art_name}}</a>
+            <a v-bind:href="'/tristalee/art/detail/'+art.id" target="_blank" class="art_name">{{art.title}}</a>
           </el-col>
           <el-col :sm="6">
             <a v-bind:href="'/tristalee/art/detail/'+art.id" target="_blank" class="creat_time">{{art.creat_time}}</a>
           </el-col>
         </el-row>  
         <el-row >
-          <span class="briefly">摘要：{{art.briefly}}</span>
+          <span class="briefly">摘要：{{art.brief}}</span>
         </el-row>
       </li>
     </ul> 
@@ -55,6 +55,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+import qs from 'qs';
 
 export default {
   name: 'article',
@@ -63,86 +65,89 @@ export default {
       msg: 'Welcome to Your article',
       artdata_show:1,
       artdata:[
-          {  
-            id:1,
-            art_name:"文章一",
-            creat_time:"2017-01-01",
-            briefly : "哈哈哈哈"
-          },
-          { 
-            id:2,
-            art_name:"文章二 回家大煞风景",
-            creat_time:"2017-01-03",
-            briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          },
-          { 
-            id:3,
-            art_name:"文章三 翻江倒海风景",
-            creat_time:"2017-05-01",
-            briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          },
-          { 
-            id:4,
-            art_name:"文章四 肯定就是看风景",
-            creat_time:"2017-09-01",
-            briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          },
-          { 
-            id:5,
-            art_name:"文章五 风刀霜剑回家地方",
-            creat_time:"2016-04-01",
-            briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          },
-          { 
-            id:6,
-            art_name:"文章六 繁华的咖啡机蝴蝶结",
-            creat_time:"2017-07-01",
-            briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          },
-          { 
-            id:7,
-            art_name:"文章七 发动机伤口恢复绝代风华",
-            creat_time:"2012-01-01",
-            briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          },
-          { 
-            id:8,
-            art_name:"文章八 黄金时代恢复健康的",
-            creat_time:"2018-08-01",
-            briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          },
-          { 
-            id:9,
-            art_name:"文章九 复活节岛上飞机的",
-            creat_time:"2018-11-01",
-            briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          },
-          { 
-            id:10,
-            art_name:"文章十 份好的客户风景",
-            creat_time:"2016-01-31",
-            briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          },
-          { 
-            id:11,
-            art_name:"文章十一 可入俄反恐大会",
-            creat_time:"2017-01-01",
-            briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          },
-          { 
-            id:12,
-            art_name:"文章十二 南北方的暴发户",
-            creat_time:"2017-01-01",
-            briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          },
-          { 
-            id:13,
-            art_name:"文章十三 尽快发货的肌肤",
-            creat_time:"2017-01-01",
-            briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          },
+          // {  
+          //   id:1,
+          //   art_name:"文章一",
+          //   creat_time:"2017-01-01",
+          //   briefly : "哈哈哈哈"
+          // },
+          // { 
+          //   id:2,
+          //   art_name:"文章二 回家大煞风景",
+          //   creat_time:"2017-01-03",
+          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
+          // },
+          // { 
+          //   id:3,
+          //   art_name:"文章三 翻江倒海风景",
+          //   creat_time:"2017-05-01",
+          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
+          // },
+          // { 
+          //   id:4,
+          //   art_name:"文章四 肯定就是看风景",
+          //   creat_time:"2017-09-01",
+          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
+          // },
+          // { 
+          //   id:5,
+          //   art_name:"文章五 风刀霜剑回家地方",
+          //   creat_time:"2016-04-01",
+          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
+          // },
+          // { 
+          //   id:6,
+          //   art_name:"文章六 繁华的咖啡机蝴蝶结",
+          //   creat_time:"2017-07-01",
+          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
+          // },
+          // { 
+          //   id:7,
+          //   art_name:"文章七 发动机伤口恢复绝代风华",
+          //   creat_time:"2012-01-01",
+          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
+          // },
+          // { 
+          //   id:8,
+          //   art_name:"文章八 黄金时代恢复健康的",
+          //   creat_time:"2018-08-01",
+          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
+          // },
+          // { 
+          //   id:9,
+          //   art_name:"文章九 复活节岛上飞机的",
+          //   creat_time:"2018-11-01",
+          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
+          // },
+          // { 
+          //   id:10,
+          //   art_name:"文章十 份好的客户风景",
+          //   creat_time:"2016-01-31",
+          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
+          // },
+          // { 
+          //   id:11,
+          //   art_name:"文章十一 可入俄反恐大会",
+          //   creat_time:"2017-01-01",
+          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
+          // },
+          // { 
+          //   id:12,
+          //   art_name:"文章十二 南北方的暴发户",
+          //   creat_time:"2017-01-01",
+          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
+          // },
+          // { 
+          //   id:13,
+          //   art_name:"文章十三 尽快发货的肌肤",
+          //   creat_time:"2017-01-01",
+          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
+          // },
         ],
     }
+  },
+  created:function(){
+    this.getArtBlog();
   },
   methods:{
     handleCurrentChange:function(val){
@@ -154,6 +159,24 @@ export default {
       var currPageArt = [];
       currPageArt = artdata.slice(10*currPage-10,10*currPage);
       return currPageArt;
+    },
+    getArtBlog:function(){
+      var self = this;
+      axios.post('/api/tec.php',qs.stringify({
+        type:'art',
+        operate:"getlist",
+      }))
+      .then(function (response) {
+        if(response.data.status.code === 1){
+          self.artdata = response.data.data;
+          console.log(response.data.data);
+          console.log(this);
+        }
+       
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     }
   }
 }
