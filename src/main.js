@@ -3,12 +3,14 @@
 import Vue from 'vue'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
+import { Message } from 'element-ui';
 import App from './App'
 import router from './router'
 import './assets/utf8-php/ueditor.config.js'
 import './assets/utf8-php/ueditor.all.min.js'
 import './assets/utf8-php/lang/zh-cn/zh-cn.js'
 import './assets/utf8-php/ueditor.parse.min.js'
+
 
 Vue.use(ElementUI)
 

@@ -11,9 +11,10 @@ class ConnMySQL
 	protected $Database = 'tristalee_blog';
 	public $TEST = 'test';
 
-	public function makeConnect($type){
+	public function makeConnect($type,$operate,$addnew){
 		$db = new mysqli($this->HOST, $this->UserName, $this->PassWord,
 			$this->Database);
+		$db->set_charset("utf8");
 		// if ($mysqli->connect_error) {
   //   		die('Connect Error (' . $mysqli->connect_errno . ') '
   //           	. $mysqli->connect_error);
@@ -22,28 +23,65 @@ class ConnMySQL
 		//     die('Connect Error (' . mysqli_connect_errno() . ') '
 		//             . mysqli_connect_error());
 		// }
-		// 技术文章
-		if($type === 'tec'){
-			$result = $db -> query("SELECT * FROM tec_blog");
-		// 杂文
-		}else if($type === 'art'){
-			$result =  $db -> query("SELECT * FROM art_blog");
-		}
 
-		if ($result) {
-			while ($row = $result -> fetch_object()){
-				$tecData[] = $row;
-			}
-			print_r($tecData);
-			echo '<br>';
-			echo '<br>';
+		switch ($operate) {
+			case 'getlist':
+				if($type === "tec"){
+					$searchSQL = "SELECT * FROM tec_blog";
+				}else if($type === "art"){
+					$searchSQL = "SELECT * FROM art_blog";
+				}
+				$result = $db -> query($searchSQL);
+				if ($result) {
+					while ($row = $result -> fetch_object()){
+						$tecData[] = $row;
+					}
+					// print_r($tecData);
+					$status["code"] = 1;
+					$status["message"] = "success";
+					echo json_encode(array('data'=>$tecData,"status"=>$status));  
 
-		    /* free result set */
-		    $result->close();
-		}else {
-			echo "wrong type";
+				    $result->close();
+				}else {
+					$status["code"] = 0;
+					$status["message"] = "无数据";
+					echo json_encode(array("status"=>$status));  
+				}
+
+				$db->close();
+				break;
+			case 'addnew':
+
+				if($addnew["typeupload"] === "tec"){
+					$stmt = $db->prepare("INSERT INTO tec_blog(title,   
+brief,content) VALUES (?, ?, ?)");    
+				}else if($addnew["typeupload"] === "art"){
+					$stmt = $db->prepare("INSERT INTO art_blog(title,   
+brief,content) VALUES (?, ?, ?)");  
+				}
+
+				$stmt->bind_param('sss', $addnew['title'],   
+				$addnew['brief'],  
+				$addnew['content']);
+				$stmt->execute();  
+				$newId = $stmt->insert_id;  
+				$stmt->close();  
+				
+				$status["code"] = 1;
+				$status["message"] = "新记录插入成功";
+				echo json_encode(array("status"=>$status));  
+				// if($type === "tec"){
+				// 	$list = $conn -> makeConnect('tec');
+				// }else if($type === "art"){
+				// 	$list = $conn -> makeConnect('art');
+				// }
+				// return $list;
+				# code...
+				break;
+			default:
+				# code...
+				break;
 		}
-		$db->close();
 	}	
 
 

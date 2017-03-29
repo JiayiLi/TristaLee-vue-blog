@@ -39,7 +39,7 @@
             <a v-bind:href="'/tristalee/tec/detail/'+tec.id" target="_blank" class="tec_name">{{tec.title}}</a>
           </el-col>
           <el-col :sm="6">
-            <a v-bind:href="'/tristalee/tec/detail/'+tec.id" target="_blank" class="creat_time">{{tec.creat_time}}</a>
+            <a v-bind:href="'/tristalee/tec/detail/'+tec.id" target="_blank" class="creat_time">{{tec.creat_time.split(" ")[0]}}</a>
           </el-col>
         </el-row>  
         <el-row >

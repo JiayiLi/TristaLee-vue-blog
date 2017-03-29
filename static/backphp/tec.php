@@ -2,6 +2,7 @@
 include "conn_sql.php";
 header("Content-Type:text/html;charset=utf-8");
 header("Access-Control-Allow-Origin:*");
+
 /**
 * 
 */
@@ -18,20 +19,48 @@ header("Access-Control-Allow-Origin:*");
 // $test = new Tec();
 // $test->getData();
 
-
+// echo "<br>";
 $conn = new ConnMySQL;
-$type = '';
-function options($conn,$type,$post){
-	print_r($type);
-	echo '<br>';
-	print_r($post);
-	echo '<br>';
+function options($conn,$post){
+	$params = $post;
+	if(key_exists("type",$params)&&key_exists("operate",$params)){
+		$type = $params["type"];
+		$operate = $params["operate"];
+		
+		$results = $conn -> makeConnect($type,$operate,'');
+		echo $results;
+		// switch () {
+		// 	case 'getlist':
+		// 		if($type === "tec"){
+		// 			$list = $conn -> makeConnect('tec');
+		// 		}else if($type === "art"){
+		// 			$list = $conn -> makeConnect('art');
+		// 		}
+		// 		echo $list;
+		// 		# code...
+		// 		break;
+
+		// 	case 'addnew':
+		// 		// if($type === "tec"){
+		// 		// 	$list = $conn -> makeConnect('tec');
+		// 		// }else if($type === "art"){
+		// 		// 	$list = $conn -> makeConnect('art');
+		// 		// }
+		// 		// return $list;
+		// 		# code...
+		// 		break;
+		// 	default:
+		// 		# code...
+		// 		break;
+		// }
+		
+		
+	}
+
 	// $conn -> test();
 	// $conn -> hosttest();
-	$conn -> makeConnect('tec');
-	$conn -> makeConnect('art');
 }
 
-options($conn,$_POST["type"],$_POST)
+options($conn,$_POST);
 
 ?>
