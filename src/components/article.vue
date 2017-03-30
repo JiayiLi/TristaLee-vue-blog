@@ -36,10 +36,10 @@
       <li v-for="art in pagination(artdata)" class="m-b-lg art_list padder">
         <el-row :gutter="10" class="m-b-sm">
           <el-col :sm="18">
-            <a v-bind:href="'/tristalee/art/detail/'+art.id" target="_blank" class="art_name">{{art.title}}</a>
+            <a v-bind:href="'/tristalee/detail?type=art&id='+art.id" target="_blank" class="art_name">{{art.title}}</a>
           </el-col>
           <el-col :sm="6">
-            <a v-bind:href="'/tristalee/art/detail/'+art.id" target="_blank" class="creat_time">{{art.creat_time.split(" ")[0]}}</a>
+            <a v-bind:href="'/tristalee/detail?type=art&id='+art.id" target="_blank" class="creat_time">{{art.creat_time.split(" ")[0]}}</a>
           </el-col>
         </el-row>  
         <el-row >
@@ -178,6 +178,7 @@ export default {
         console.log(error);
       });
     }
+  
   }
 }
 

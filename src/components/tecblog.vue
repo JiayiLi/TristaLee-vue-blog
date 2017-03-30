@@ -36,10 +36,10 @@
       <li v-for="tec in pagination(tecdata)" class="m-b-lg tec_list padder">
         <el-row :gutter="10" class="m-b-sm">
           <el-col :sm="18">
-            <a v-bind:href="'/tristalee/tec/detail/'+tec.id" target="_blank" class="tec_name">{{tec.title}}</a>
+            <a v-bind:href="'/tristalee/detail?type=tec&id='+tec.id" target="_blank" class="tec_name">{{tec.title}}</a>
           </el-col>
           <el-col :sm="6">
-            <a v-bind:href="'/tristalee/tec/detail/'+tec.id" target="_blank" class="creat_time">{{tec.creat_time.split(" ")[0]}}</a>
+            <a v-bind:href="'/tristalee/detail?type=tec&id='+tec.id" target="_blank" class="creat_time">{{tec.creat_time.split(" ")[0]}}</a>
           </el-col>
         </el-row>  
         <el-row >
@@ -154,7 +154,6 @@ export default {
   // },
   methods:{
     handleCurrentChange:function(val){
-      console.log(this);
       this.tecdata_show = val;
       window.scrollTo(0, 0);
     },

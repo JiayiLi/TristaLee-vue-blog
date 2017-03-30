@@ -23,36 +23,18 @@ header("Access-Control-Allow-Origin:*");
 $conn = new ConnMySQL;
 function options($conn,$post){
 	$params = $post;
+
 	if(key_exists("type",$params)&&key_exists("operate",$params)){
 		$type = $params["type"];
 		$operate = $params["operate"];
-		
-		$results = $conn -> makeConnect($type,$operate,'');
-		echo $results;
-		// switch () {
-		// 	case 'getlist':
-		// 		if($type === "tec"){
-		// 			$list = $conn -> makeConnect('tec');
-		// 		}else if($type === "art"){
-		// 			$list = $conn -> makeConnect('art');
-		// 		}
-		// 		echo $list;
-		// 		# code...
-		// 		break;
+		$results = null;
+		// print_r(expression)
+		$results = $conn -> makeConnect($type,$operate,$params);
 
-		// 	case 'addnew':
-		// 		// if($type === "tec"){
-		// 		// 	$list = $conn -> makeConnect('tec');
-		// 		// }else if($type === "art"){
-		// 		// 	$list = $conn -> makeConnect('art');
-		// 		// }
-		// 		// return $list;
-		// 		# code...
-		// 		break;
-		// 	default:
-		// 		# code...
-		// 		break;
-		// }
+
+			// $results = $conn -> makeConnect($type,$operate,$params);
+		
+		echo $results;
 		
 		
 	}

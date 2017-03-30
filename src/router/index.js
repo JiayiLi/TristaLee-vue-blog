@@ -16,8 +16,7 @@ const router = new Router({
         { path: '/tristalee', name: 'Home', component: Home},
         { path: '/tristalee/tecblog', name: 'tecblog', component: tecblog },
         { path: '/tristalee/article', name: 'article', component: article },
-        { path: '/tristalee/tec/detail/:id', name: 'detail', component: detail },
-        { path: '/tristalee/art/detail/:id', name: 'detail', component: detail },
+        { path: '/tristalee/detail/', name: 'detail', component: detail },
         { path: '/lijiayi/add/new', name: 'addnew', component:addnew },
   	]
 })
