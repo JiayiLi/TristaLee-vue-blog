@@ -92,7 +92,7 @@
         //,indentValue:'2em'
 
         //,initialFrameWidth:1000  //初始化编辑器宽度,默认1000
-        //,initialFrameHeight:320  //初始化编辑器高度,默认320
+        // ,initialFrameHeight:320  //初始化编辑器高度,默认320
 
         //,readonly : false //编辑器初始化结束后,编辑区域是否是只读的，默认是false
 
@@ -283,7 +283,7 @@
 
         //scaleEnabled
         //是否可以拉伸长高,默认true(当开启时，自动长高失效)
-        //,scaleEnabled:false
+        ,scaleEnabled:false
         //,minFrameWidth:800    //编辑器拖动时最小宽度,默认800
         //,minFrameHeight:220  //编辑器拖动时最小高度,默认220
 
@@ -331,14 +331,14 @@
         //sourceEditor
         //源码的查看方式,codemirror 是代码高亮，textarea是文本框,默认是codemirror
         //注意默认codemirror只能在ie8+和非ie中使用
-        //,sourceEditor:"codemirror"
+        // ,sourceEditor:"codemirror"
         //如果sourceEditor是codemirror，还用配置一下两个参数
         //codeMirrorJsUrl js加载的路径，默认是 URL + "third-party/codemirror/codemirror.js"
-        //,codeMirrorJsUrl:URL + "third-party/codemirror/codemirror.js"
+        // ,codeMirrorJsUrl:URL + "third-party/codemirror/codemirror.js"
         //codeMirrorCssUrl css加载的路径，默认是 URL + "third-party/codemirror/codemirror.css"
-        //,codeMirrorCssUrl:URL + "third-party/codemirror/codemirror.css"
+        // ,codeMirrorCssUrl:URL + "third-party/codemirror/codemirror.css"
         //编辑器初始化完成后是否进入源码模式，默认为否。
-        //,sourceEditorFirst:false
+        // ,sourceEditorFirst:false
 
         //iframeUrlMap
         //dialog内容的路径 ～会被替换成URL,垓属性一旦打开，将覆盖所有的dialog的默认路径

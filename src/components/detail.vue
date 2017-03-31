@@ -19,7 +19,8 @@
   font-size: 14px;
   line-height: 1.5rem;
   margin-top: 15px;
-  display: inline-block;
+  padding: 10px;
+  /* display: inline-block; */
 }
 
 .recommend {
@@ -34,21 +35,62 @@
   line-height: 20px;
   font-size: 12px;
 }
+.edui-default p {
+  font-size: 20px;
+
+}
+.edui-default pre{
+  background-color: #ccc;
+
+}
 </style>
+
+<style>
+.ueditor-content pre{
+    background-color: #ccc;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    padding: 5px 20px; 
+}
+
+.ueditor-content div {
+    background-color: #f5f5f5
+}
+
+.ueditor-content pre {
+    word-wrap: break-word;
+    white-space: pre-wrap
+}
+
+.ueditor-content span {
+    /* font-family: Courier New!important; */
+    /* font-size: 12px!important; */
+    line-height: 1.5!important
+}
+.ueditor-content ol li {
+    list-style-image: none
+}
+
+.ueditor-content ol li span {
+    color: #000
+}
+
+</style>
+
 
 <template>
   <div class="detail m-t">
     <div class="detail-wrap">
       <h1 class="title">{{detail.title}}</h1>
-      <span class="content">
-        {{detail.content}}
-      </span>
+      <div class="content ueditor-content" v-html="detail.content">
+        
+      </div>
     </div>
     <div class="recommend">
       <h4>推荐阅读</h4>
       <ul class="m-t-sm">
         <li v-for="rec in recommends">
-          <a v-bind:href="'/tristalee/tec/detail/'+rec.id" target="_blank" >{{rec.title}}</a>
+          <a v-bind:href="'/tristalee/detail?type='+type+'&id='+rec.id" target="_blank" >{{rec.title}}</a>
         </li>
       </ul>
     </div>
@@ -73,6 +115,7 @@ export default {
         // title:"文章一 就会发觉很多风景",
         // content:"hjhjdhfakjdhfjdfjdkshfjkfjhdsjkfhjkdshfjdhsfjhdsjkfhjdkshfjkdhjfdvbncxbvnbcnvbcnbvncbvncbxnvbxcnufii反馈倒海翻江大煞风景的是翻江倒海积分活动十分好的设计规范，活动时间发货的设计风华绝代舒服，风刀霜剑还翻江倒海时间发货的设计风，放假都开始放假的设计风看见的",
       },
+      content_wrap:'',
       recommends:[
         // {
         //   id:2,
@@ -92,6 +135,10 @@ export default {
         // }
       ]
     }
+  },
+  mounted(){
+    this.content_wrap = this.$refs.abc;
+    console.log(this.$refs.abc);
   },
   created:function(){
     this.getURLParam();
