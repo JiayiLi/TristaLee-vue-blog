@@ -2,6 +2,7 @@
 .detail-wrap{
   border-left: 3px solid #C6CA53;
   padding: 10px 20px 10px;
+  overflow: auto;
 }
 .title{
   font-size: 20px;
@@ -27,13 +28,13 @@
   margin-top: 25px;
 }
 .recommend h4{
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 400;
 }
 
 .recommend ul li{
   line-height: 20px;
-  font-size: 12px;
+  font-size: 14px;
 }
 .edui-default p {
   font-size: 20px;
