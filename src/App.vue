@@ -28,7 +28,10 @@
               <router-link to="/tristalee" tag="li">About ME</router-link>
             </el-menu-item>
             <el-menu-item index="4">
-              <router-link to="/lijiayi/add/new" tag="li">AddNew</router-link>
+              <router-link to="/tristalee/add/new" tag="li">AddNew</router-link>
+            </el-menu-item>
+            <el-menu-item index="5">
+              <router-link to="/tristalee/user" tag="li">login/signup</router-link>
             </el-menu-item>
            <!--  <el-submenu index="3">
               <template slot="title">我的工作台</template>
@@ -86,7 +89,8 @@ export default {
         "/tristalee/article":"2",
         "/tristalee":"3",
         "/":"3",
-        "/lijiayi/add/new":"4"
+        "/tristalee/add/new":"4",
+        "/tristalee/user" :'5'
       }
     }
   },
@@ -100,7 +104,7 @@ export default {
   },
   computed:{
     hidesidebar:function(){
-      return (this.currentRoute !== "/tristalee" && this.currentRoute !=="/" && this.currentRoute !=="/lijiayi/add/new");
+      return (this.currentRoute !== "/tristalee" && this.currentRoute !=="/" && this.currentRoute !=="/tristalee/add/new" && this.currentRoute!== "/tristalee/user");
     }
   }
 }

@@ -5,6 +5,8 @@ import tecblog from 'components/tecblog'
 import article from 'components/article'
 import detail from 'components/detail'
 import addnew from 'components/addnew'
+import user from 'components/user'
+
 
 
 Vue.use(Router)
@@ -17,7 +19,9 @@ const router = new Router({
         { path: '/tristalee/tecblog', name: 'tecblog', component: tecblog },
         { path: '/tristalee/article', name: 'article', component: article },
         { path: '/tristalee/detail/', name: 'detail', component: detail },
-        { path: '/lijiayi/add/new', name: 'addnew', component:addnew },
+        { path: '/tristalee/add/new', name: 'addnew', component:addnew },
+        { path: '/tristalee/user', name: 'user', component:user },
+
   	]
 })
 
