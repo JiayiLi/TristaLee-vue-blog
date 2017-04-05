@@ -124,9 +124,10 @@ export default {
             var param = {
               name:self[formName].name,
               pass:self[formName].pass,
-              type:formName
+              type:formName,
+              operate:'user'
             }
-            axios.post('/api/user.php',qs.stringify(param))
+            axios.post('/api/tec.php',qs.stringify(param))
             .then(function (response) {
               if(response.data.status.code === 1){
                 self.successInfo();

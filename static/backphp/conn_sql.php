@@ -131,6 +131,39 @@ brief,content) VALUES (?, ?, ?)");
 				echo json_encode(array('data'=>$result_arr,"status"=>$status)); 
 
 				break;
+			case 'user':
+				$type = $params["type"];
+				$name = $params["name"];
+				$pass = $params["pass"];
+				if($type == 'signupForm'){
+					$stmt = $db->prepare("INSERT INTO user(user_name,   
+	password) VALUES (?, ?)");    
+					$stmt->bind_param('ss', $params['name'],   
+					$params['pass']);
+					$stmt->execute();  
+					$newId = $stmt->insert_id;  
+					$stmt->close();  
+					
+					$status["code"] = 1;
+					$status["message"] = "新记录插入成功";
+					echo json_encode(array("status"=>$status));  
+				}else if($type == 'loginForm'){
+					$searchSQL = "SELECT * FROM user WHERE user_name='".$name."' and password='".$pass."'";
+					$result = $db->query($searchSQL);
+					if($result){
+				    	$row  = $result->fetch_assoc();
+					   	$status["code"] = 1;
+						$status["message"] = "success";
+				    }else {
+				    	$row='';
+				    	$status["code"] = 0;
+						$status["message"] = "error";
+				    }
+
+				    echo json_encode(array("status"=>$status)); 
+				} 
+
+				break;
 
 			default:
 				# code...
