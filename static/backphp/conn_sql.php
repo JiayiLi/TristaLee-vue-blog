@@ -152,8 +152,16 @@ brief,content) VALUES (?, ?, ?)");
 					$result = $db->query($searchSQL);
 					if($result){
 				    	$row  = $result->fetch_assoc();
-					   	$status["code"] = 1;
-						$status["message"] = "success";
+				    	if($row["id"]){
+				    		$status["code"] = 1;
+							$status["message"] = "success";
+				    	}else {
+				    		$status["code"] = 0;
+							$status["message"] = "error";
+				    	}
+				    	// print_r($row["id"]==' ');
+				    	// echo '<br>';
+					   	
 				    }else {
 				    	$row='';
 				    	$status["code"] = 0;
@@ -181,7 +189,7 @@ brief,content) VALUES (?, ?, ?)");
 		echo '<br>';
 	}
 
-
+	// $mysqli->close();
 }
 // $mysqli = new mysqli('127.0.0.1', 'root', '123456', 'tristalee_blog');
 // if ($mysqli->connect_error) {
