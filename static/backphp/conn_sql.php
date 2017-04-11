@@ -153,9 +153,12 @@ brief,content) VALUES (?, ?, ?)");
 					if($result){
 				    	$row  = $result->fetch_assoc();
 				    	if($row["id"]){
+				    		$data["us_name"] = $row["user_name"];
+				    		$data["id"] = $row["id"];
 				    		$status["code"] = 1;
 							$status["message"] = "success";
 				    	}else {
+				    		$data = [];
 				    		$status["code"] = 0;
 							$status["message"] = "error";
 				    	}
@@ -164,11 +167,12 @@ brief,content) VALUES (?, ?, ?)");
 					   	
 				    }else {
 				    	$row='';
+				    	$data = [];
 				    	$status["code"] = 0;
 						$status["message"] = "error";
 				    }
 
-				    echo json_encode(array("status"=>$status)); 
+				    echo json_encode(array("status"=>$status,"data"=>$data)); 
 				} 
 
 				break;

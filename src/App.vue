@@ -12,7 +12,7 @@
           </div>
 
           <div class="header-name pull-left">
-            <span><a href="https://github.com/JiayiLi" target="_blank">TristaLee</a></span>
+            <span><a href="https://github.com/JiayiLi" target="_blank" >TristaLee</a></span>
           </div>
 
 
@@ -31,7 +31,15 @@
               <router-link to="/tristalee/add/new" tag="li">AddNew</router-link>
             </el-menu-item>
             <el-menu-item index="5">
-              <router-link to="/tristalee/user" tag="li">login/signup</router-link>
+              <router-link to="/tristalee/user" tag="li" v-if="!isLogin">login/signup</router-link>
+              <li v-if="isLogin">
+                <el-dropdown @command="handleCommand">
+                    <span class="username"><i class="el-icon-star-off"></i>  {{username}}</span>
+                    <el-dropdown-menu slot="dropdown">
+                      <el-dropdown-item command="logout">退出登录</el-dropdown-item>
+                    </el-dropdown-menu>
+                </el-dropdown>
+              </li>
             </el-menu-item>
            <!--  <el-submenu index="3">
               <template slot="title">我的工作台</template>
@@ -91,21 +99,61 @@ export default {
         "/":"3",
         "/tristalee/add/new":"4",
         "/tristalee/user" :'5'
-      }
+      },
+      username:null,
+      isLogin:false,
     }
   },
   watch:{
     '$route' (to , from){
       this.currentRoute = to.path;
+      this.checkLogin();
     }
   },
+  // mounted(){
+  //   this.getUserInfo();
+  // },
   created: function () {
+    this.checkLogin();
     this.isActive = this.allNav[this.currentRoute];
   },
   computed:{
     hidesidebar:function(){
       return (this.currentRoute !== "/tristalee" && this.currentRoute !=="/" && this.currentRoute !=="/tristalee/add/new" && this.currentRoute!== "/tristalee/user");
     }
+  },
+  methods:{
+    checkLogin:function(){
+      if(!this.getCookie('session')){
+        this.$router.push('/tristalee/user');
+        this.isLogin = false;
+      }else {
+        var sessionContent = unescape(this.getCookie('session'));
+        var currName = sessionContent.split(',')[0];
+        var currId = sessionContent.split(',')[1];
+        this.username = currName;
+        console.log(currName);
+        this.isLogin = true;
+        // this.$router.push('/tristalee/tecblog');
+      }
+    },
+    handleCommand:function(command) {
+      if(command === "logout"){
+        this.logout();
+      }
+    },
+    logout:function(){
+
+      console.log(111);
+      this.isLogin = false;
+      this.delCookie('session');
+    }
+    // getUserInfo:function(){
+    //   // console.log(this);
+    //   // console.log(this.getCookie('session'))
+    //   this.getCookie('session');
+      
+    // }
   }
 }
 </script>

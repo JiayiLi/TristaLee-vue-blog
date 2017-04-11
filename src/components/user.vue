@@ -130,7 +130,13 @@ export default {
             axios.post('/api/tec.php',qs.stringify(param))
             .then(function (response) {
               if(response.data.status.code === 1){
+                // console.log(response.data);
                 self.successInfo();
+                var expireDays = 1000 * 60 * 60 * 24 * 15;
+                var sessionContext = response.data.data.us_name+','+response.data.data.id;
+                self.setCookie('session', sessionContext, expireDays);
+
+
               }else {
                 self.errorInfo();
               }

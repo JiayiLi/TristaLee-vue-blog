@@ -148,5 +148,7 @@ td,th {
     top: 0;
     cursor: pointer;
 }
-
+span.username{
+  color: #bfcbd9;
+}
 
