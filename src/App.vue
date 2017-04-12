@@ -127,6 +127,7 @@ export default {
       if(!this.getCookie('session')){
         // this.$router.push('/tristalee/user');
         this.isLogin = false;
+        this.username = null;
       }else {
         var sessionContent = unescape(this.getCookie('session'));
         var currName = sessionContent.split(',')[0];
