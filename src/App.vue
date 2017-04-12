@@ -27,8 +27,8 @@
             <el-menu-item index="3">
               <router-link to="/tristalee" tag="li">About ME</router-link>
             </el-menu-item>
-            <el-menu-item index="4">
-              <router-link to="/tristalee/add/new" tag="li">AddNew</router-link>
+            <el-menu-item index="4" v-if="username==='lijiayi'"> 
+              <router-link to="/tristalee/add/new" tag="li" >AddNew</router-link>
             </el-menu-item>
             <el-menu-item index="5">
               <router-link to="/tristalee/user" tag="li" v-if="!isLogin">login/signup</router-link>
@@ -125,14 +125,13 @@ export default {
   methods:{
     checkLogin:function(){
       if(!this.getCookie('session')){
-        this.$router.push('/tristalee/user');
+        // this.$router.push('/tristalee/user');
         this.isLogin = false;
       }else {
         var sessionContent = unescape(this.getCookie('session'));
         var currName = sessionContent.split(',')[0];
         var currId = sessionContent.split(',')[1];
         this.username = currName;
-        console.log(currName);
         this.isLogin = true;
         // this.$router.push('/tristalee/tecblog');
       }
@@ -143,10 +142,10 @@ export default {
       }
     },
     logout:function(){
-
-      console.log(111);
       this.isLogin = false;
+      this.username = null;
       this.delCookie('session');
+
     }
     // getUserInfo:function(){
     //   // console.log(this);

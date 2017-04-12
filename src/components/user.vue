@@ -7,7 +7,25 @@
   <div class="user">
     <i :plain="true" @click="successInfo"></i>
     <el-tabs v-model="activeName">
-      <el-tab-pane label="注册" name="first">
+      <el-tab-pane label="登陆" name="first">
+        <el-row :gutter="20" class="m-t">
+          <el-col :span="18" :offset="3">
+            <el-form :model="loginForm" :rules="loginFormRule" ref="loginForm" label-width="100px" class="demo-ruleForm">
+              <el-form-item label="用户名">
+                <el-input v-model="loginForm.name"></el-input>
+              </el-form-item>
+              <el-form-item label="密码" prop="pass">
+                <el-input type="password" v-model="loginForm.pass" auto-complete="off"></el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-button type="primary" @click="submitForm('loginForm')">提交</el-button>
+                <el-button @click="resetForm('loginForm')">重置11</el-button>
+              </el-form-item>
+            </el-form>
+          </el-col>
+        </el-row>
+      </el-tab-pane>
+      <el-tab-pane label="注册" name="second">
         <el-row :gutter="20" class="m-t">
           <el-col :span="18" :offset="3">
             <el-form :model="signupForm" :rules="signupFormRule" ref="signupForm" label-width="100px" class="demo-ruleForm">
@@ -28,24 +46,7 @@
           </el-col>
         </el-row>
       </el-tab-pane>
-      <el-tab-pane label="登陆" name="second">
-        <el-row :gutter="20" class="m-t">
-          <el-col :span="18" :offset="3">
-            <el-form :model="loginForm" :rules="loginFormRule" ref="loginForm" label-width="100px" class="demo-ruleForm">
-              <el-form-item label="用户名">
-                <el-input v-model="loginForm.name"></el-input>
-              </el-form-item>
-              <el-form-item label="密码" prop="pass">
-                <el-input type="password" v-model="loginForm.pass" auto-complete="off"></el-input>
-              </el-form-item>
-              <el-form-item>
-                <el-button type="primary" @click="submitForm('loginForm')">提交</el-button>
-                <el-button @click="resetForm('loginForm')">重置11</el-button>
-              </el-form-item>
-            </el-form>
-          </el-col>
-        </el-row>
-      </el-tab-pane>
+      
     </el-tabs>
   </div>
 </template>
@@ -53,6 +54,7 @@
 <script>
 import axios from 'axios';
 import qs from 'qs';
+import sha1 from 'sha1';
 
 export default {
     name:'user',
@@ -121,11 +123,13 @@ export default {
         var self = this;
         this.$refs[formName].validate((valid) => {
           if (valid) {
+
+            var passHash = sha1(sha1(self[formName].pass));
             var param = {
               name:self[formName].name,
-              pass:self[formName].pass,
+              pass:passHash,
               type:formName,
-              operate:'user'
+              operate:'user',
             }
             axios.post('/api/tec.php',qs.stringify(param))
             .then(function (response) {
@@ -153,7 +157,6 @@ export default {
         });
       },
       resetForm:function(formName){
-        console.log(this.$refs);
         this.$refs[formName].resetFields();
       }
     }
