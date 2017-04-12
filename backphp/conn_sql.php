@@ -143,10 +143,20 @@ brief,content) VALUES (?, ?, ?)");
 					$stmt->execute();  
 					$newId = $stmt->insert_id;  
 					$stmt->close();  
+					if($newId==0){
+						$data["us_name"] = '';
+				    	$data["id"] = '';
+						$status["code"] = 0;
+						$status["message"] = "已有该用户名";
+					}else {
+						$data["us_name"] = $name;
+				    	$data["id"] = $newId;
+						$status["code"] = 1;
+						$status["message"] = "新记录插入成功";
+					}
+
 					
-					$status["code"] = 1;
-					$status["message"] = "新记录插入成功";
-					echo json_encode(array("status"=>$status));  
+					echo json_encode(array("data"=>$data,"status"=>$status));  
 				}else if($type == 'loginForm'){
 					$searchSQL = "SELECT * FROM user WHERE user_name='".$name."' and password='".$pass."'";
 					$result = $db->query($searchSQL);

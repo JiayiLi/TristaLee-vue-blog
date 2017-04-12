@@ -105,17 +105,17 @@ export default {
       };
     },
     methods: {
-      successInfo:function() {
+      successInfo:function(mes) {
         this.$message({
           showClose: true,
-          message: '操作成功',
+          message: mes,
           type:"success"
         });
       },
-      errorInfo :function(){
+      errorInfo :function(mes){
         this.$message({
             showClose: true,
-            message: '操作失败',
+            message: mes,
             type:"error"
           });
       },
@@ -135,19 +135,17 @@ export default {
             .then(function (response) {
               if(response.data.status.code === 1){
                 // console.log(response.data);
-                self.successInfo();
+                self.successInfo("操作成功");
                 var expireDays = 1000 * 60 * 60 * 24 * 15;
+
                 var sessionContext = response.data.data.us_name+','+response.data.data.id;
                 self.setCookie('session', sessionContext, expireDays);
-
-
               }else {
-                self.errorInfo();
+                self.errorInfo(response.data.status.message);
               }
             })
             .catch(function (error) {
-              self.errorInfo();
-              console.log(error);
+              self.errorInfo("咦，为什么会出错？");
             });
            
           } else {
