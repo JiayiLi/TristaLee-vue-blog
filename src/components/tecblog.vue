@@ -24,16 +24,19 @@
     line-height: 50px;
     border-bottom: 3px dotted #72CBCA;
   }
-
+  .operate a{
+      color: #a3a3a3;
+  }
 </style>
 
 <template>
   <div class="tecblog">
+    <i :plain="true" @click="successInfo"></i>
     <div class="tecblog_header m-b">
       <h2>技术博客列表</h2>
     </div>
     <ul>
-      <li v-for="tec in pagination(tecdata)" class="m-b-lg tec_list padder">
+      <li v-for="tec in pagination(tecdata)" class="m-b-lg tec_list padder" ref="teclist" v-bind:id="tec.id">
         <el-row :gutter="10" class="m-b-sm">
           <el-col :sm="18">
             <a v-bind:href="'/tristalee/detail?type=tec&id='+tec.id" target="_blank" class="tec_name">{{tec.title}}</a>
@@ -41,12 +44,18 @@
           <el-col :sm="6">
             <a v-bind:href="'/tristalee/detail?type=tec&id='+tec.id" target="_blank" class="creat_time">{{tec.creat_time.split(" ")[0]}}</a>
           </el-col>
-        </el-row>  
+        </el-row>
         <el-row >
           <span class="briefly">摘要：{{tec.brief}}</span>
         </el-row>
+        <el-row :gutter="10">
+            <el-col :sm="6" :offset="18" class="operate">
+                <a href="javascript:void(0)" @click="deleteItem(tec.id, $event)">删除</a>
+                <a v-bind:href="'/tristalee/add/new?type=tec&id='+tec.id" target="_blank">编辑</a>
+            </el-col>
+        </el-row>
       </li>
-    </ul> 
+    </ul>
     <el-pagination
       layout="total,prev, pager, next"
       :total="tecdata.length" :size="10"  @current-change="handleCurrentChange" class="m-b-lg pull-right">
@@ -65,79 +74,79 @@ export default {
       msg: 'Welcome to Your tecblog',
       tecdata_show:1,
       tecdata:[
-          // {  
+          // {
           //   id:1,
           //   tec_name:"文章一 就会发觉很多风景",
           //   creat_time:"2017-01-01",
           //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
           // },
-          // { 
+          // {
           //   id:2,
           //   tec_name:"文章二 回家大煞风景",
           //   creat_time:"2017-01-03",
           //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
           // },
-          // { 
+          // {
           //   id:3,
           //   tec_name:"文章三 翻江倒海风景",
           //   creat_time:"2017-05-01",
           //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
           // },
-          // { 
+          // {
           //   id:4,
           //   tec_name:"文章四 肯定就是看风景",
           //   creat_time:"2017-09-01",
           //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
           // },
-          // { 
+          // {
           //   id:5,
           //   tec_name:"文章五 风刀霜剑回家地方",
           //   creat_time:"2016-04-01",
           //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
           // },
-          // { 
+          // {
           //   id:6,
           //   tec_name:"文章六 繁华的咖啡机蝴蝶结",
           //   creat_time:"2017-07-01",
           //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
           // },
-          // { 
+          // {
           //   id:7,
           //   tec_name:"文章七 发动机伤口恢复绝代风华",
           //   creat_time:"2012-01-01",
           //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
           // },
-          // { 
+          // {
           //   id:8,
           //   tec_name:"文章八 黄金时代恢复健康的",
           //   creat_time:"2018-08-01",
           //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
           // },
-          // { 
+          // {
           //   id:9,
           //   tec_name:"文章九 复活节岛上飞机的",
           //   creat_time:"2018-11-01",
           //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
           // },
-          // { 
+          // {
           //   id:10,
           //   tec_name:"文章十 份好的客户风景",
           //   creat_time:"2016-01-31",
           //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
           // },
-          // { 
+          // {
           //   id:11,
           //   tec_name:"文章十一 可入俄反恐大会",
           //   creat_time:"2017-01-01",
           //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
           // },
-          // { 
+          // {
           //   id:12,
           //   tec_name:"文章十二 南北方的暴发户",
           //   creat_time:"2017-01-01",
           //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
           // },
-          // { 
+          // {
           //   id:13,
           //   tec_name:"文章十三 尽快发货的肌肤",
           //   creat_time:"2017-01-01",
@@ -153,6 +162,20 @@ export default {
   //   headers: {'Content-Type': 'application/x-www-form-urlencoded'}
   // },
   methods:{
+    successInfo:function() {
+      this.$message({
+        showClose: true,
+        message: '操作成功',
+        type:"success"
+      });
+    },
+    errorInfo :function(){
+        this.$message({
+            showClose: true,
+            message: '操作失败',
+            type:"error"
+        });
+    },
     handleCurrentChange:function(val){
       this.tecdata_show = val;
       window.scrollTo(0, 0);
@@ -172,14 +195,33 @@ export default {
       .then(function (response) {
         if(response.data.status.code === 1){
           self.tecdata = response.data.data;
-          console.log(response.data.data);
-          console.log(this);
         }
-       
       })
       .catch(function (error) {
         console.log(error);
       });
+    },
+    deleteItem:function(id,e){
+        var self = this;
+        axios.post('/api/tec.php',qs.stringify({
+          type:'tec',
+          id : id,
+          operate:"deleteItem",
+        }))
+        .then(function (response) {
+            if(response.data.status.code === 1){
+                self.successInfo();
+                for(var i =0;i<self.$refs.teclist.length;i++){
+                    self.$refs.teclist[i].id === id?self.$refs.teclist[i].remove():console.log(id);
+                }
+            }else {
+                self.errorInfo();
+            }
+        })
+        .catch(function (error) {
+            console.log(error)
+            self.errorInfo();
+        });
     }
   }
 }

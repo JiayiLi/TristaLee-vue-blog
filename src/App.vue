@@ -16,9 +16,9 @@
           </div>
 
 
-          
+
           <el-menu theme="dark" class="el-menu-demo pull-right navbar" mode="horizontal"  :default-active="isActive">
-            <el-menu-item index="1" justify="end" > 
+            <el-menu-item index="1" justify="end" >
               <router-link to="/tristalee/tecblog" tag="li" >Tec Blog</router-link>
             </el-menu-item>
             <el-menu-item index="2">
@@ -27,7 +27,7 @@
             <el-menu-item index="3">
               <router-link to="/tristalee" tag="li">About ME</router-link>
             </el-menu-item>
-            <el-menu-item index="4" v-if="username==='lijiayi'"> 
+            <el-menu-item index="4" v-if="username==='lijiayi'">
               <router-link to="/tristalee/add/new" tag="li" >AddNew</router-link>
             </el-menu-item>
             <el-menu-item index="5">
@@ -50,7 +50,7 @@
           </el-menu>
           <div class="header_search inline pull-right m-r">
             <input type="text" placeholder="搜索从这里开始...">
-            <button type="submit"><i class="el-icon-search"></i></button>       
+            <button type="submit"><i class="el-icon-search"></i></button>
           </div>
         <!-- </el-row> -->
       </div>
@@ -69,7 +69,7 @@
         </el-col>
       </el-row>
     </div>
-    
+
     <!-- 导航结束 -->
     <!-- <router-view></router-view> -->
 
@@ -146,15 +146,13 @@ export default {
       this.isLogin = false;
       this.username = null;
       this.delCookie('session');
-
     }
     // getUserInfo:function(){
     //   // console.log(this);
     //   // console.log(this.getCookie('session'))
     //   this.getCookie('session');
-      
+
     // }
   }
 }
 </script>
-

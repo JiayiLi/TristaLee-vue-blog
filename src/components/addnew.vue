@@ -56,11 +56,16 @@ export default {
         msg: 'Welcome to Your Vue.js App',
         editor: null,
         typeupload:'tec',
-        brief:''
+        brief:'',
+        editId:null,
+        urlParam:null,
+        editType:null
     }
   },
   mounted() {
     this.editor = UE.getEditor('editor');
+    this.getURLParam();
+    this.getEditData();
   },
   destroyed() {
     this.editor.destroy();
@@ -99,9 +104,37 @@ export default {
         })
         .catch(function (error) {
           self.errorInfo();
-          console.log(error);
         });
 
+    },
+    getURLParam:function(){
+        if(window.location.search){
+            this.urlParam = window.location.search.split('?')[1].split('&');
+            this.editId = this.urlParam[1].split('=')[1];
+            this.editType = this.urlParam[0].split('=')[1];
+        }
+    },
+    getEditData:function(){
+        if(this.editId){
+            axios.post('/api/tec.php',qs.stringify({
+             type:this.editType,
+             id :this.editId,
+             operate:"getdetail",
+            }))
+            .then(function (response) {
+
+                if(response.data.status.code === 1){
+                    
+                }
+                console.log(response)
+                // if(response.data.status.code === 1){
+                //    self.detail = response.data.data;
+                // }
+            })
+           .catch(function (error) {
+             console.log(error);
+           });
+        }
     }
   }
 }
