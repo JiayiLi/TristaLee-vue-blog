@@ -59,7 +59,8 @@ export default {
         brief:'',
         editId:null,
         urlParam:null,
-        editType:null
+        editType:null,
+        isEdit:false
     }
   },
   mounted() {
@@ -86,12 +87,16 @@ export default {
         });
     },
     getUeditorContent:function(){
+
         var param = {
           title : this.title,
           content: this.editor.getContent(),
           typeupload: this.typeupload,
           brief:this.brief,
-          type:"addnew"
+          type:"addnew",
+        }
+        if(this.isEdit){
+            param.id = this.editId
         }
         var self = this;
         axios.post('/api/add_new.php',qs.stringify(param))
@@ -115,6 +120,7 @@ export default {
         }
     },
     getEditData:function(){
+        var self = this;
         if(this.editId){
             axios.post('/api/tec.php',qs.stringify({
              type:this.editType,
@@ -124,9 +130,17 @@ export default {
             .then(function (response) {
 
                 if(response.data.status.code === 1){
-                    
+                    var data = response.data.data;
+                    self.brief = data.brief;
+                    self.typeupload = self.editType;
+                    self.title = data.title;
+
+                    self.editor.addListener("ready",function(){
+                        self.editor.setContent(data.content,false);
+                    })
+
+                    self.isEdit = true;
                 }
-                console.log(response)
                 // if(response.data.status.code === 1){
                 //    self.detail = response.data.data;
                 // }
