@@ -24,6 +24,9 @@
     line-height: 50px;
     border-bottom: 3px dotted #72CBCA;
   }
+  .operate a{
+      color: #a3a3a3;
+  }
 
 </style>
 
@@ -33,7 +36,7 @@
       <h2>杂文随笔列表</h2>
     </div>
     <ul>
-      <li v-for="art in pagination(artdata)" class="m-b-lg art_list padder">
+      <li v-for="art in pagination(artdata)" class="m-b-lg art_list padder"  ref="artlist" v-bind:id="art.id">
         <el-row :gutter="10" class="m-b-sm">
           <el-col :sm="18">
             <a v-bind:href="'/tristalee/detail?type=art&id='+art.id" target="_blank" class="art_name">{{art.title}}</a>
@@ -44,6 +47,12 @@
         </el-row>  
         <el-row >
           <span class="briefly">摘要：{{art.brief}}</span>
+        </el-row>
+        <el-row :gutter="10">
+            <el-col :sm="6" :offset="18" class="operate">
+                <a href="javascript:void(0)" @click="deleteItem(art.id, $event)">删除</a>
+                <a v-bind:href="'/tristalee/add/new?type=art&id='+art.id" target="_blank">编辑</a>
+            </el-col>
         </el-row>
       </li>
     </ul> 
@@ -150,6 +159,20 @@ export default {
     this.getArtBlog();
   },
   methods:{
+    successInfo:function() {
+      this.$message({
+        showClose: true,
+        message: '操作成功',
+        type:"success"
+      });
+    },
+    errorInfo :function(){
+        this.$message({
+            showClose: true,
+            message: '操作失败',
+            type:"error"
+        });
+    },
     handleCurrentChange:function(val){
       this.artdata_show = val;
       window.scrollTo(0, 0);
@@ -177,6 +200,28 @@ export default {
       .catch(function (error) {
         console.log(error);
       });
+    },
+    deleteItem:function(id,e){
+        var self = this;
+        axios.post('/api/tec.php',qs.stringify({
+          type:'art',
+          id : id,
+          operate:"deleteItem",
+        }))
+        .then(function (response) {
+            if(response.data.status.code === 1){
+                self.successInfo();
+                for(var i =0;i<self.$refs.artlist.length;i++){
+                    self.$refs.artlist[i].id === id?self.$refs.artlist[i].remove():console.log(id);
+                }
+            }else {
+                self.errorInfo();
+            }
+        })
+        .catch(function (error) {
+            console.log(error)
+            self.errorInfo();
+        });
     }
   
   }

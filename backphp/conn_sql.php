@@ -59,19 +59,19 @@ class ConnMySQL
 				    $editTitle = $params['title'];
 				    $editBrief = $params['brief'];
 				    $editContent = $params['content'];
-					print_r($editTitle);
 
 				    if($params["typeupload"] === "tec"){
 						$stmt = $db->prepare("UPDATE tec_blog SET title = ?, 
-						   brief = ?, 
-						   content = ?,  
-						   WHERE id = ?");
+						   brief=?, 
+						   content=?  
+						   WHERE id=?");
 					}else if($params["typeupload"] === "art"){
 						$stmt = $db->prepare("UPDATE art_blog SET title = ?, 
 						   brief = ?, 
-						   content = ?,  
+						   content = ? 
 						   WHERE id = ?");
 					}
+					
 					$stmt->bind_param('sssi',
 					  $editTitle,   
 					$editBrief,  
@@ -80,7 +80,6 @@ class ConnMySQL
 					$stmt->execute(); 
 					$stmt->close();
 
-					// print_r($db->affected_rows);
 
 					$status["code"] = 1;
 					$status["message"] = "新记录插入成功";
