@@ -15,10 +15,12 @@ class ConnMySQL
 		$db = new mysqli($this->HOST, $this->UserName, $this->PassWord,
 			$this->Database);
 		$db->set_charset("utf8");
-		// if ($mysqli->connect_error) {
-  //   		die('Connect Error (' . $mysqli->connect_errno . ') '
-  //           	. $mysqli->connect_error);
-		// }
+		// Check connection
+
+		if ($db->connect_error) {
+    		die('Connect Error (' . $db->connect_errno . ') '
+            	. $db->connect_error);
+		}
 		// if (mysqli_connect_error()) {
 		//     die('Connect Error (' . mysqli_connect_errno() . ') '
 		//             . mysqli_connect_error());
@@ -52,23 +54,57 @@ class ConnMySQL
 				break;
 			case 'addnew':
 
-				if($params["typeupload"] === "tec"){
-					$stmt = $db->prepare("INSERT INTO tec_blog(title,   
-brief,content) VALUES (?, ?, ?)");    
-				}else if($params["typeupload"] === "art"){
-					$stmt = $db->prepare("INSERT INTO art_blog(title,   
-brief,content) VALUES (?, ?, ?)");  
-				}
+				if($params['id']){
+				    $editId = $params['id'];
+				    $editTitle = $params['title'];
+				    $editBrief = $params['brief'];
+				    $editContent = $params['content'];
+					print_r($editTitle);
 
-				$stmt->bind_param('sss', $params['title'],   
-				$params['brief'],  
-				$params['content']);
-				$stmt->execute();  
-				$newId = $stmt->insert_id;  
-				$stmt->close();  
+				    if($params["typeupload"] === "tec"){
+						$stmt = $db->prepare("UPDATE tec_blog SET title = ?, 
+						   brief = ?, 
+						   content = ?,  
+						   WHERE id = ?");
+					}else if($params["typeupload"] === "art"){
+						$stmt = $db->prepare("UPDATE art_blog SET title = ?, 
+						   brief = ?, 
+						   content = ?,  
+						   WHERE id = ?");
+					}
+					$stmt->bind_param('sssi',
+					  $editTitle,   
+					$editBrief,  
+					$editContent,
+					$editId);
+					$stmt->execute(); 
+					$stmt->close();
+
+					// print_r($db->affected_rows);
+
+					$status["code"] = 1;
+					$status["message"] = "新记录插入成功";
+
+				}else {
+					if($params["typeupload"] === "tec"){
+						$stmt = $db->prepare("INSERT INTO tec_blog(title,   
+	brief,content) VALUES (?, ?, ?)");    
+					}else if($params["typeupload"] === "art"){
+						$stmt = $db->prepare("INSERT INTO art_blog(title,   
+	brief,content) VALUES (?, ?, ?)");  
+					}
+
+					$stmt->bind_param('sss', $params['title'],   
+					$params['brief'],  
+					$params['content']);
+					$stmt->execute();  
+					$newId = $stmt->insert_id;  
+					$stmt->close();  
+					
+					$status["code"] = 1;
+					$status["message"] = "新记录插入成功";
+				}
 				
-				$status["code"] = 1;
-				$status["message"] = "新记录插入成功";
 				echo json_encode(array("status"=>$status));  
 				// if($type === "tec"){
 				// 	$list = $conn -> makeConnect('tec');
@@ -186,7 +222,27 @@ brief,content) VALUES (?, ?, ?)");
 				} 
 
 				break;
+			case 'deleteItem':
+				$id = $params["id"];
 
+				if($type === "tec"){
+					$searchSQL = "DELETE FROM tec_blog WHERE id=".$id."";
+				}else if($type === "art"){
+					$searchSQL = "DELETE FROM art_blog WHERE id=".$id."";
+				}
+
+			    $result = $db->query($searchSQL);
+			    if($db->affected_rows){
+					$status["code"] = 1;
+					$status["message"] = "success";
+			    }else{
+			    	$status["code"] = 0;
+					$status["message"] = "error";
+			    }
+
+				echo json_encode(array("status"=>$status)); 
+
+				break;
 			default:
 				# code...
 				break;
