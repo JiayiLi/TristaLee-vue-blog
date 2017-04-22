@@ -59,7 +59,7 @@
       <el-row :gutter="10">
         <el-col :span="hidesidebar?18:24">
           <div class="grid-content">
-            <router-view keep-alive></router-view>
+            <router-view keep-alive :user-li="userLi"></router-view>
           </div>
         </el-col>
         <el-col :span="6"  v-if="hidesidebar">
@@ -102,6 +102,7 @@ export default {
       },
       username:null,
       isLogin:false,
+      userLi:false
     }
   },
   watch:{
@@ -122,19 +123,24 @@ export default {
       return (this.currentRoute !== "/tristalee" && this.currentRoute !=="/" && this.currentRoute !=="/tristalee/add/new" && this.currentRoute!== "/tristalee/user");
     }
   },
+  prop:{
+
+  },
   methods:{
     checkLogin:function(){
       if(!this.getCookie('session')){
         // this.$router.push('/tristalee/user');
         this.isLogin = false;
         this.username = null;
+        this.userLi = false;
       }else {
         var sessionContent = unescape(this.getCookie('session'));
         var currName = sessionContent.split(',')[0];
         var currId = sessionContent.split(',')[1];
         this.username = currName;
         this.isLogin = true;
-        // this.$router.push('/tristalee/tecblog');
+        this.userLi = true;
+
       }
     },
     handleCommand:function(command) {

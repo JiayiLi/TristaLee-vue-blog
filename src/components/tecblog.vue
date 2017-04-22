@@ -48,7 +48,7 @@
         <el-row >
           <span class="briefly">摘要：{{tec.brief}}</span>
         </el-row>
-        <el-row :gutter="10">
+        <el-row :gutter="10" v-if="userLi">
             <el-col :sm="6" :offset="18" class="operate">
                 <a href="javascript:void(0)" @click="deleteItem(tec.id, $event)">删除</a>
                 <a v-bind:href="'/tristalee/add/new?type=tec&id='+tec.id" target="_blank">编辑</a>
@@ -60,6 +60,9 @@
       layout="total,prev, pager, next"
       :total="tecdata.length" :size="10"  @current-change="handleCurrentChange" class="m-b-lg pull-right">
     </el-pagination>
+
+    <div>{{userLi}}</div>
+    
   </div>
 </template>
 
@@ -73,95 +76,27 @@ export default {
     return {
       msg: 'Welcome to Your tecblog',
       tecdata_show:1,
-      tecdata:[
-          // {
-          //   id:1,
-          //   tec_name:"文章一 就会发觉很多风景",
-          //   creat_time:"2017-01-01",
-          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          // },
-          // {
-          //   id:2,
-          //   tec_name:"文章二 回家大煞风景",
-          //   creat_time:"2017-01-03",
-          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          // },
-          // {
-          //   id:3,
-          //   tec_name:"文章三 翻江倒海风景",
-          //   creat_time:"2017-05-01",
-          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          // },
-          // {
-          //   id:4,
-          //   tec_name:"文章四 肯定就是看风景",
-          //   creat_time:"2017-09-01",
-          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          // },
-          // {
-          //   id:5,
-          //   tec_name:"文章五 风刀霜剑回家地方",
-          //   creat_time:"2016-04-01",
-          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          // },
-          // {
-          //   id:6,
-          //   tec_name:"文章六 繁华的咖啡机蝴蝶结",
-          //   creat_time:"2017-07-01",
-          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          // },
-          // {
-          //   id:7,
-          //   tec_name:"文章七 发动机伤口恢复绝代风华",
-          //   creat_time:"2012-01-01",
-          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          // },
-          // {
-          //   id:8,
-          //   tec_name:"文章八 黄金时代恢复健康的",
-          //   creat_time:"2018-08-01",
-          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          // },
-          // {
-          //   id:9,
-          //   tec_name:"文章九 复活节岛上飞机的",
-          //   creat_time:"2018-11-01",
-          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          // },
-          // {
-          //   id:10,
-          //   tec_name:"文章十 份好的客户风景",
-          //   creat_time:"2016-01-31",
-          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          // },
-          // {
-          //   id:11,
-          //   tec_name:"文章十一 可入俄反恐大会",
-          //   creat_time:"2017-01-01",
-          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          // },
-          // {
-          //   id:12,
-          //   tec_name:"文章十二 南北方的暴发户",
-          //   creat_time:"2017-01-01",
-          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          // },
-          // {
-          //   id:13,
-          //   tec_name:"文章十三 尽快发货的肌肤",
-          //   creat_time:"2017-01-01",
-          //   briefly : "哈哈哈哈  嘿嘿嘿 系休息下飞机可撒红腹锦鸡等繁花似锦的回复解放军队风景"
-          // },
-        ],
+      tecdata:[],
     }
   },
   created:function(){
+    this.checkLogin();
     this.getTecBlog();
   },
   // http: {
   //   headers: {'Content-Type': 'application/x-www-form-urlencoded'}
   // },
+  props: ['userLi'],  
   methods:{
+    checkLogin:function(){
+      console.log(this.userLi);
+      // console.log(props);
+        // this.$route.myProps = true;
+      // if(!this.getCookie('session')){
+
+      // }
+      // console.log(this.getCookie('session'));
+    },
     successInfo:function() {
       this.$message({
         showClose: true,
