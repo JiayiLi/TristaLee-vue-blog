@@ -140,6 +140,8 @@ export default {
 
                 var sessionContext = response.data.data.us_name+','+response.data.data.id;
                 self.setCookie('session', sessionContext, expireDays);
+                self.$router.push('/tristalee/tecblog');
+
               }else {
                 self.errorInfo(response.data.status.message);
               }

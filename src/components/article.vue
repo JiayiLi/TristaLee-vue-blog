@@ -48,7 +48,7 @@
         <el-row >
           <span class="briefly">摘要：{{art.brief}}</span>
         </el-row>
-        <el-row :gutter="10">
+        <el-row :gutter="10" v-if="userLi">
             <el-col :sm="6" :offset="18" class="operate">
                 <a href="javascript:void(0)" @click="deleteItem(art.id, $event)">删除</a>
                 <a v-bind:href="'/tristalee/add/new?type=art&id='+art.id" target="_blank">编辑</a>
@@ -79,6 +79,7 @@ export default {
   created:function(){
     this.getArtBlog();
   },
+  props:['userLi'],
   methods:{
     successInfo:function() {
       this.$message({
@@ -113,8 +114,6 @@ export default {
       .then(function (response) {
         if(response.data.status.code === 1){
           self.artdata = response.data.data;
-          console.log(response.data.data);
-          console.log(this);
         }
        
       })

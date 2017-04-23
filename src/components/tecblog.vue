@@ -60,9 +60,6 @@
       layout="total,prev, pager, next"
       :total="tecdata.length" :size="10"  @current-change="handleCurrentChange" class="m-b-lg pull-right">
     </el-pagination>
-
-    <div>{{userLi}}</div>
-    
   </div>
 </template>
 
@@ -80,23 +77,10 @@ export default {
     }
   },
   created:function(){
-    this.checkLogin();
     this.getTecBlog();
   },
-  // http: {
-  //   headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-  // },
   props: ['userLi'],  
   methods:{
-    checkLogin:function(){
-      console.log(this.userLi);
-      // console.log(props);
-        // this.$route.myProps = true;
-      // if(!this.getCookie('session')){
-
-      // }
-      // console.log(this.getCookie('session'));
-    },
     successInfo:function() {
       this.$message({
         showClose: true,

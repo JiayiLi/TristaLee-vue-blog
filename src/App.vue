@@ -111,9 +111,6 @@ export default {
       this.checkLogin();
     }
   },
-  // mounted(){
-  //   this.getUserInfo();
-  // },
   created: function () {
     this.checkLogin();
     this.isActive = this.allNav[this.currentRoute];
@@ -122,9 +119,6 @@ export default {
     hidesidebar:function(){
       return (this.currentRoute !== "/tristalee" && this.currentRoute !=="/" && this.currentRoute !=="/tristalee/add/new" && this.currentRoute!== "/tristalee/user");
     }
-  },
-  prop:{
-
   },
   methods:{
     checkLogin:function(){
@@ -139,8 +133,9 @@ export default {
         var currId = sessionContent.split(',')[1];
         this.username = currName;
         this.isLogin = true;
-        this.userLi = true;
-
+        if(currName === "lijiayi"){
+          this.userLi = true;
+        }
       }
     },
     handleCommand:function(command) {
@@ -152,13 +147,10 @@ export default {
       this.isLogin = false;
       this.username = null;
       this.delCookie('session');
+      if(this.$route.path === '/tristalee/add/new'){
+          this.$router.push('/tristalee/tecblog');
+      }
     }
-    // getUserInfo:function(){
-    //   // console.log(this);
-    //   // console.log(this.getCookie('session'))
-    //   this.getCookie('session');
-
-    // }
   }
 }
 </script>
