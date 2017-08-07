@@ -108,12 +108,13 @@ export default {
   watch:{
     '$route' (to , from){
       this.currentRoute = to.path;
+      this.isActive = this.allNav[this.currentRoute];
+      // console.log(111);
       this.checkLogin();
     }
   },
   created: function () {
     this.checkLogin();
-    this.isActive = this.allNav[this.currentRoute];
   },
   computed:{
     hidesidebar:function(){
